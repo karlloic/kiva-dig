@@ -47,3 +47,4 @@ fabric.properties
 
 # Don't include the full snapshot ZIP since it's massive.
 kiva_ds_json.zip
+*.json
