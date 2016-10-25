@@ -50,3 +50,6 @@ kiva_ds_json.zip
 *.json
 spark-*/
 *.swp
+*.pyc
+metastore_db/
+derby.log

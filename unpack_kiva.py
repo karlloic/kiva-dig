@@ -2,12 +2,18 @@ import zipfile
 import json
 import os
 
-kiva_folder = 'kiva-data/'
+try:
+    from json import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError # Python 2 compatibility
+
+kiva_root = 'kiva-data/'
+kiva_folders = ['loans', 'lenders', 'loans_lenders']
 
 def mkdirs():
-    os.mkdir(kiva_folder)
-    for f in map(lambda x: kiva_folder + x,
-                 ['loans', 'lenders', 'loans_lenders']):
+    os.mkdir(kiva_root)
+    for f in map(lambda x: kiva_root + x,
+                 kiva_folders):
         if not os.path.isdir(f):
             os.mkdir(f)
 
@@ -31,11 +37,22 @@ def unpack_kiva(filename="kiva_ds_json.zip"):
             obj_type = json_name.split('/')[0]
             json_content = json_obj[obj_type]
             formatted = [reformat_json(j) for j in json_content]
-            with open(kiva_folder + json_name, 'w+') as output:
+            with open(kiva_root + json_name, 'w+') as output:
                 output.write('\n'.join(formatted))
-        except json.JSONDecodeError:
+        except JSONDecodeError:
             print("Error decoding file {}".format(json_name))
+
+def merge_kiva():
+    for folder in kiva_folders:
+        files = os.listdir(kiva_root + folder)
+        out_handle = open(kiva_root + folder + '.json', 'w+')
+        for f in files:
+            in_handle = open(os.path.join(kiva_root, folder, f), 'r')
+            for line in in_handle:
+                out_handle.write(line)
+
 
 if __name__ == '__main__':
     mkdirs()
     unpack_kiva()
+    merge_kiva()
