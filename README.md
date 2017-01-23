@@ -1,4 +1,1 @@
-# kiva-dig
-Scripts to analyze and process information coming from Kiva in Spark (Python)
-
-The intention is to fetch data from http://build.kiva.org/docs/data/snapshots, then these scripts will do the rest.
+Our goal is to develop a machine learning method which can predict whether microfinance loans will go bad. This research has not been attempted yet, and so our group is the first to pioneer these methods. What makes microfinance prediction difficult is that it is not governed by standard economic indicators; there is no credit score to take into account. Instead, we have to look to other factors to actually "learn" what makes a quality loan. The research we are doing is important to help all people involved in microfinance; The loan servicers can monitor the loans in an automated fashion, the loan originators can spot poor loans from the beginning, and loan investors have an easy way to do risk analysis. All this improves the lifecycle of microfinance ensuring a safer market for all in this important industry.
